@@ -29,6 +29,7 @@ public class Main {
 	private static final String GET_HOME = "GH";
 	private static final String ADD_STAY = "AT";
 	private static final String LIST_USER_HOME = "LH";
+	private static final String SEARCH_PROPERTIES = "PH";
 	private static final String EXIT = "XS";
 
 	// Messagens sucesso
@@ -49,6 +50,7 @@ public class Main {
 	private static final String HOME_VISISTED = "Propriedade ja foi visitada.";
 	private static final String USER_NOT_OWNER = "Viajante nao e proprietario.";
 	private static final String IS_OWNER = "Viajante e o proprietario.";
+	private static final String NO_RESULTS = "Pesquisa nao devolveu resultados.";
 
 	// outros
 	private static final String LEAVE_SAVE = "Gravado e terminado...";
@@ -61,8 +63,8 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		Scanner in = new Scanner(System.in);
-		//HomeAwayClass hA2 = load();
-		HomeAwayClass hA =new HomeAwayClass();
+		// HomeAwayClass hA2 = load();
+		HomeAwayClass hA = new HomeAwayClass();
 		String com = comands(in);
 
 		while (!com.equals(EXIT)) {
@@ -94,6 +96,8 @@ public class Main {
 			case LIST_USER_HOME:
 				listUserHome(in, hA);
 				break;
+			case SEARCH_PROPERTIES:
+				searchProperties(in,hA);
 			case EXIT:
 				break;
 			default:
@@ -103,7 +107,7 @@ public class Main {
 			System.out.println();
 			com = comands(in);
 		}
-		//save(hA);
+		// save(hA);
 		System.out.println(LEAVE_SAVE);
 		System.out.println();
 		in.close();
@@ -222,8 +226,7 @@ public class Main {
 
 		if (hA.hasIdHome(idHome)) {
 			System.out.println(
-					(hA.getHome(idHome).getHomeInfo() + hA.getUser(hA.getHome(idHome).getIdUser()).getName())
-							.trim());
+					(hA.getHome(idHome).getHomeInfo() + hA.getUser(hA.getHome(idHome).getIdUser()).getName()).trim());
 			// System.out.println("\n"+hA.getHome(idHome).getDescription()+":
 			// "+hA.getHome(idHome).getMorada()+","+hA.getHome(idHome).getLocal()+",
 			// "+hA.getHome(idHome).getPrice()+",
@@ -236,66 +239,65 @@ public class Main {
 	private static void addStay(Scanner in, HomeAwayClass hA) {
 		String idUser = in.next();
 		String idHome = in.next();
-		
-		try{
-			int points = in.nextInt();
-			
-		}catch(Exception e){
-			System.out.println(IS_OWNER);
-			
+
+		if (in.next().contains("t")) {
+			System.out.println("da se");
 		}
-		finally{
-			if(!hA.hasidUser(idUser)){
-				System.out.println(USER_NO_EXISTS);
-			}
-			else if(!hA.hasIdHome(idHome)){
-				System.out.println(HOME_NO_EXISTS);
-			}
-			else if(!hA.isHomeThisUser(idUser, idHome)){
-				System.out.println(USER_NOT_OWNER);
-			}
-			else{
-				hA.addStay(idUser, idHome, 0);
-				System.out.println(ADD_STAY_OK);
-			}
-		}
-	}
-	/*
-	String blank = in.next();
 
-	if (hA.hasidUser(idUser)) {
-		if (hA.hasIdHome(idHome)) {
-			if (hA.getUser(idUser).getIdHome() != idHome) {
-				if (blank != null || blank != "\n") {
-
-					int points = Integer.parseInt(blank);
-
-					if (points >= 0 && points < 20) {
-						System.out.println("YUPIE!!");
-					} else
-						System.out.println("Almost!");
-				} else
-					System.out.println("Falhado!");
-			} else
-				System.out.println("Not YET!");
-		} else
-			System.out.println("BURRO!");
-	}*/
-	
-	// Esta ainda em trabalho
-	//private static void addStayOwner(Scanner in, HomeAwayClass hA) {
+		else
+			System.out.println("damnnnn");
 		/*
-		String[] tmp = new String[4];
-		String idUser = in.next();
-		tmp[0] = idUser;
-		String idHome = in.next();
-		tmp[1] = idHome;
-		System.out.println(tmp.length);
-		if (tmp.length == 4) {
-			System.out.println("JA ESTA");
-		*/
-		
-	//}
+		 * if (!hA.hasidUser(idUser)) System.out.println(USER_NO_EXISTS); else
+		 * if (!hA.hasIdHome(idHome)) System.out.println(HOME_NO_EXISTS);
+		 * 
+		 * else if (!hA.isHomeThisUser(idUser, idHome)) { points = in.nextInt();
+		 * 
+		 * if (points < 0 || points > 20) System.out.println(WRONG_DATA);
+		 * 
+		 * else if (hA.isHomeThisUser(idUser, idHome))
+		 * System.out.println(IS_OWNER); else { hA.addStay(idUser, idHome,
+		 * points); System.out.println(ADD_STAY_OK); } } else { if (in.nextI) {
+		 * System.out.println("ola"); System.out.println(IS_OWNER); } else {
+		 * hA.addStay(idUser, idHome, 0); System.out.println(ADD_STAY_OK); } }
+		 */
+	}
+
+	/*
+	 * } try{ int points = in.nextInt();
+	 * 
+	 * }catch(Exception e){ System.out.println(IS_OWNER);
+	 * 
+	 * } finally{ if(!hA.hasidUser(idUser)){ System.out.println(USER_NO_EXISTS);
+	 * } else if(!hA.hasIdHome(idHome)){ System.out.println(HOME_NO_EXISTS); }
+	 * else if(!hA.isHomeThisUser(idUser, idHome)){
+	 * System.out.println(USER_NOT_OWNER); } else{ hA.addStay(idUser, idHome,
+	 * 0); System.out.println(ADD_STAY_OK); } } }
+	 */
+	/*
+	 * String blank = in.next();
+	 * 
+	 * if (hA.hasidUser(idUser)) { if (hA.hasIdHome(idHome)) { if
+	 * (hA.getUser(idUser).getIdHome() != idHome) { if (blank != null || blank
+	 * != "\n") {
+	 * 
+	 * int points = Integer.parseInt(blank);
+	 * 
+	 * if (points >= 0 && points < 20) { System.out.println("YUPIE!!"); } else
+	 * System.out.println("Almost!"); } else System.out.println("Falhado!"); }
+	 * else System.out.println("Not YET!"); } else System.out.println("BURRO!");
+	 * }
+	 */
+
+	// Esta ainda em trabalho
+	// private static void addStayOwner(Scanner in, HomeAwayClass hA) {
+	/*
+	 * String[] tmp = new String[4]; String idUser = in.next(); tmp[0] = idUser;
+	 * String idHome = in.next(); tmp[1] = idHome;
+	 * System.out.println(tmp.length); if (tmp.length == 4) {
+	 * System.out.println("JA ESTA");
+	 */
+
+	// }
 
 	// Lista as propriedades do utilizador(anfintriao)
 	private static void listUserHome(Scanner in, HomeAwayClass hA) {
@@ -319,35 +321,45 @@ public class Main {
 			System.out.println(USER_NO_EXISTS);
 	}
 
+	private static void searchProperties(Scanner in, HomeAwayClass hA) {
+
+		Iterator<Home> it = hA.homeIterator();
+		int counter = 0;
+		int pessoas = in.nextInt();
+		String local = in.nextLine();
+
+		if (pessoas > 0) {
+			while (it.hasNext()) {
+				Home temp = it.next();
+				if (temp.getLocal().equals(local)) {
+					System.out.println("\n" + temp.getHomeInfo());
+					counter++;
+				}
+			}
+			if (counter == 0) {
+				System.out.println(NO_RESULTS);
+
+			}
+		} else
+			System.out.println(WRONG_DATA);
+
+	}
+
 	// ---------SAVE AND LOAD---------//
-/*
-	private static final void save(HomeAwayClass hA) {
-		try {
-			ObjectOutputStream file = new ObjectOutputStream(new FileOutputStream(DATA_FILE));
-			file.writeObject(hA);
-			file.flush();
-			file.close();
-		} catch (IOException e) {
-			System.out.println("Erro!");
-		}
-	}
-
- 	private static final HomeAwayClass load() {
-		try {
-			ObjectInputStream file = new ObjectInputStream(new FileInputStream(DATA_FILE));
-			// InvertibleQueue<Integer> queue = (InvertibleQueue<Integer>)
-			// file.readObject();
-			HomeAwayClass hA2 = (HomeAwayClass) file.readObject();
-			file.close();
-			System.out.println("load: LI FICHEIRO");
-			return hA2;
-		} catch (IOException e) {
-			return new HomeAwayClass();
-		} catch (ClassNotFoundException e) {
-			return new HomeAwayClass();
-		}
-
-	}
-	*/
+	/*
+	 * private static final void save(HomeAwayClass hA) { try {
+	 * ObjectOutputStream file = new ObjectOutputStream(new
+	 * FileOutputStream(DATA_FILE)); file.writeObject(hA); file.flush();
+	 * file.close(); } catch (IOException e) { System.out.println("Erro!"); } }
+	 * 
+	 * private static final HomeAwayClass load() { try { ObjectInputStream file
+	 * = new ObjectInputStream(new FileInputStream(DATA_FILE)); //
+	 * InvertibleQueue<Integer> queue = (InvertibleQueue<Integer>) //
+	 * file.readObject(); HomeAwayClass hA2 = (HomeAwayClass) file.readObject();
+	 * file.close(); System.out.println("load: LI FICHEIRO"); return hA2; }
+	 * catch (IOException e) { return new HomeAwayClass(); } catch
+	 * (ClassNotFoundException e) { return new HomeAwayClass(); }
+	 * 
+	 * }
+	 */
 }
-
